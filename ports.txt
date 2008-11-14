@@ -1,0 +1,12 @@
+Ports.txt
+=========
+This file keeps track of what ports I assign to what tools/processes. I try to
+keep blocks reserved for future expansion or whatnot, usually reserving entire
+digits / multiples of 10 for things.
+
+1****		Personal
+  11***		- elliottcable
+
+2****		Professional
+  21***		- yreality
+    211**	  - Integrity
