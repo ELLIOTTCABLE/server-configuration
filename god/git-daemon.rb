@@ -6,7 +6,7 @@ God.watch do |watch|; watch.name = 'git-daemon'
   watch.interval = 60.seconds
   watch.grace = 10.seconds
   
-  watch.start = "git-daemon\
+  watch.start = "git daemon\
   --base-path=#{SRV}/git\
   --export-all\
   --pid-file=#{watch.pid_file}\
