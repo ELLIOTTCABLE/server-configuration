@@ -10,6 +10,12 @@ God.watch do |watch|; watch.name = 'nginx'
                   pid #{watch.pid_file};\
                   user #{USR} #{GRP};\
                 '"
+                
+  watch.start = ['nginx',
+                  '-c', "#{SRV}/conf/nginx.conf",
+                  '-g', [['pid', watch.pid_file].join(' '),
+                         ['user', [USR, GRP].join(' ')].join(' ')].join('; ').inspect
+                  ].join(' ')
   
   watch.restart = lambda do
     if !File.file? watch.pid_file
