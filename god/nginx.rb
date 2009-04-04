@@ -20,7 +20,6 @@ God.watch do |watch|; watch.name = 'nginx'
       LOG.warn("#{watch.name} asked to refresh (SIGHUP PID #{pid})")
     end
   end
-  watch.behavior(:clean_pid_file)
   
   watch.start_if do |start|
     start.condition(:process_running) do |condition|
