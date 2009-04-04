@@ -11,8 +11,8 @@ God.watch do |watch|; watch.name = 'nginx'
                   user #{USR} #{GRP};\
                 '"
   
-  watch.stop = lambda do
-    if File.file? watch.pid_file
+  watch.restart = lambda do
+    if !File.file? watch.pid_file
       LOG.error("#{watch.name} is missing a PID file - it's probably not running")
     else
       pid = File.read(watch.pid_file).match(/\d+/)[0].to_i
