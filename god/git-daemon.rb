@@ -11,7 +11,8 @@ God.watch do |watch|; watch.name = 'git-daemon'
   --export-all\
   --pid-file=#{watch.pid_file}\
   --user=#{USR} --group=#{GRP}\
-  --verbose"
+  --verbose\
+   --detach"
   
   watch.stop = lambda do
     if File.file? watch.pid_file
