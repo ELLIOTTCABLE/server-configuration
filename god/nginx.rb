@@ -21,6 +21,16 @@ God.watch do |watch|; watch.name = 'nginx'
     end
   end
   
+  watch.stop = lambda do
+    if !File.file? watch.pid_file
+      LOG.error("#{watch.name} is missing a PID file - it's probably not running")
+    else
+      pid = File.read(watch.pid_file).match(/\d+/)[0].to_i
+      Process.kill('INT', pid)
+      LOG.warn("#{watch.name} asked to suicide (SIGINT PID #{pid})")
+    end
+  end
+  
   watch.start_if do |start|
     start.condition(:process_running) do |condition|
       condition.interval = 5.seconds
