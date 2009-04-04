@@ -17,7 +17,7 @@ God.watch do |watch|; watch.name = 'nginx'
     else
       pid = File.read(watch.pid_file).match(/\d+/)[0].to_i
       Process.kill('HUP', pid)
-      LOG.warn("#{watch.name} asked to suicide")
+      LOG.warn("#{watch.name} asked to refresh (SIGHUP PID #{pid})")
     end
   end
   watch.behavior(:clean_pid_file)
