@@ -18,8 +18,8 @@ God.watch do |watch|; watch.name = 'git-daemon'
       LOG.error("#{watch.name} is missing a PID file - it's probably not running")
     else
       pid = File.read(watch.pid_file).match(/\d+/)[0].to_i
-      Process.kill('HUP', pid)
-      LOG.warn("#{watch.name} asked to suicide")
+      Process.kill('INT', pid)
+      LOG.warn("#{watch.name} asked to suicide (SIGINT PID #{pid})")
     end
   end
   watch.behavior(:clean_pid_file)
