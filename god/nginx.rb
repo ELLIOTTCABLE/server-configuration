@@ -1,21 +1,25 @@
-God.watch do |watch|; watch.name = 'git-daemon'
+God.watch do |watch|; watch.name = "nginx"
   
-  watch.pid_file = "#{SRV}/temp/pids/#{watch.name}.pid"
-        log_file = "#{SRV}/logs/#{watch.name}.log"
+  watch.pid_file = "#{SRV}/temp/pids/nginx.pid"
+        log_file = "#{SRV}/logs/nginx.log"
   
   watch.interval = 60.seconds
   watch.grace = 10.seconds
   
-  watch.start = "git daemon\
-  --base-path=#{SRV}/git\
-  --export-all\
-  --pid-file=#{watch.pid_file}\
-  --user=#{USR} --group=#{GRP}\
-  --verbose\
-   --detach"
+  watch.start = ["nginx", "-c", "/srv/conf/nginx.conf"].join(' ')
+  
+  watch.restart = lambda do
+    if !File.file? watch.pid_file
+      LOG.error("#{watch.name} is missing a PID file - it's probably not running")
+    else
+      pid = File.read(watch.pid_file).match(/\d+/)[0].to_i
+      Process.kill('HUP', pid)
+      LOG.warn("#{watch.name} asked to refresh (SIGHUP PID #{pid})")
+    end
+  end
   
   watch.stop = lambda do
-    if File.file? watch.pid_file
+    if !File.file? watch.pid_file
       LOG.error("#{watch.name} is missing a PID file - it's probably not running")
     else
       pid = File.read(watch.pid_file).match(/\d+/)[0].to_i
@@ -23,7 +27,6 @@ God.watch do |watch|; watch.name = 'git-daemon'
       LOG.warn("#{watch.name} asked to suicide (SIGINT PID #{pid})")
     end
   end
-  watch.behavior(:clean_pid_file)
   
   watch.start_if do |start|
     start.condition(:process_running) do |condition|
@@ -37,7 +40,7 @@ God.watch do |watch|; watch.name = 'git-daemon'
       condition.above = 75.megabytes
       condition.times = [3, 5] # 3 out of 5 intervals
     end
-    
+  
     restart.condition(:cpu_usage) do |condition|
       condition.above = 50.percent
       condition.times = 5
