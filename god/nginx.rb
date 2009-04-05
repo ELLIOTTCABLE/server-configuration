@@ -11,7 +11,7 @@ God.watch do |watch|; watch.name = 'nginx'
                   user #{USR} #{GRP};\
                 '"
                 
-  watch.start = ['nginx',
+  watch.start = ['/usr/local/sbin/nginx',
                   '-c', "#{SRV}/conf/nginx.conf",
                   '-g', [['pid', watch.pid_file].join(' '),
                          ['user', [USR, GRP].join(' ')].join(' ')].join('; ').inspect
