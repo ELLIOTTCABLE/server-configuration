@@ -6,7 +6,8 @@ types {
   image/jpeg                            jpeg jpg;
   application/javascript                js;
   application/ecmascript                ecma;
-  application/xhtml+xml                 xhtml xhtm;
+# application/xhtml+xml                 xhtml xhtm;
+  text/html                             xhtml xhtm;
   application/atom+xml                  atom;
   
   text/mathml                           mml;
