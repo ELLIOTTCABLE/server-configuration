@@ -8,13 +8,13 @@ types {
   application/ecmascript                ecma;
   application/xhtml+xml                 xhtml xhtm;
   application/atom+xml                  atom;
-
+  
   text/mathml                           mml;
   text/plain                            txt;
   text/vnd.sun.j2me.app-descriptor      jad;
   text/vnd.wap.wml                      wml;
   text/x-component                      htc;
-
+  
   image/png                             png;
   image/tiff                            tif tiff;
   image/vnd.wap.wbmp                    wbmp;
@@ -22,10 +22,10 @@ types {
   image/x-jng                           jng;
   image/x-ms-bmp                        bmp;
   image/svg+xml                         svg;
-
+  
   font/opentype                         otf;
   font/truetype                         ttf ttc;
-
+  
   application/java-archive              jar war ear;
   application/mac-binhex40              hqx;
   application/msword                    doc;
@@ -50,18 +50,18 @@ types {
   application/x-x509-ca-cert            der pem crt;
   application/x-xpinstall               xpi;
   application/zip                       zip;
-
+  
   application/octet-stream              bin exe dll;
   application/octet-stream              deb;
   application/octet-stream              dmg;
   application/octet-stream              eot;
   application/octet-stream              iso img;
   application/octet-stream              msi msp msm;
-
+  
   audio/midi                            mid midi kar;
   audio/mpeg                            mp3;
   audio/x-realaudio                     ra;
-
+  
   video/3gpp                            3gpp 3gp;
   video/mpeg                            mpeg mpg;
   video/quicktime                       mov;
@@ -71,4 +71,3 @@ types {
   video/x-ms-wmv                        wmv;
   video/x-msvideo                       avi;
 }
-
